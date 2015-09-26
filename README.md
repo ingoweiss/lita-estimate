@@ -19,4 +19,7 @@ none
 
 ## Usage
 
-@bot estimate US123 as 5
+```
+> @bot estimate US123 as 5
+> @bot estimates
+```
