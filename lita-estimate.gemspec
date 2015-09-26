@@ -3,10 +3,10 @@ Gem::Specification.new do |spec|
   spec.version       = "0.1.0"
   spec.authors       = ["Ingo Weiss"]
   spec.email         = ["ingo@ingoweiss.com"]
-  spec.description   = "TODO: Add a description"
-  spec.summary       = "TODO: Add a summary"
-  spec.homepage      = "TODO: Add a homepage"
-  spec.license       = "TODO: Add a license"
+  spec.description   = "Just a silly little Lita plugin for estimation"
+  spec.summary       = "Just a silly little Lita plugin for estimation"
+  spec.homepage      = "https://github.com/ingoweiss/lita-estimate"
+  spec.license       = "MIT"
   spec.metadata      = { "lita_plugin_type" => "handler" }
 
   spec.files         = `git ls-files`.split($/)
