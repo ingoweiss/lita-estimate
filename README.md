@@ -26,7 +26,7 @@ Bot> Thanks!
 
 2) in team room:
 
-Carl> @bot estimates
+Carl> @bot US123 estimates
 Bot> Peter: 5
 Bot> Paula: 3
 Bot> Average: 4
