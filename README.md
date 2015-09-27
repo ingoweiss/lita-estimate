@@ -16,10 +16,14 @@ gem "lita-estimate"
 ## Usage
 
 ```
+# in private chats with the bot:
 Peter> @bot estimate US123 as 5
 Bot> Thanks!
+
 Paula> @bot estimate US123 as 3
 Bot> Thanks!
+
+# in team room:
 Carl> @bot estimates
 Bot> Peter: 5
 Bot> Paula: 3
