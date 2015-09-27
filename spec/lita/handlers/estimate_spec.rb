@@ -4,8 +4,10 @@ describe Lita::Handlers::Estimate, lita_handler: true do
 
   describe "routing" do
 
-    it { is_expected.to route_command("estimate US123 as 1").to(:estimate) }
-    it { is_expected.to route_command("US123 estimates").to(:show_estimates) }
+    ['US123', 'us123', 'SEARCH-01', 'SEARCH_02', 'SEARCH.2.1'].each do |story_format|
+      it { is_expected.to route_command("estimate #{story_format} as 1").to(:estimate) }
+      it { is_expected.to route_command("#{story_format} estimates").to(:show_estimates) }
+    end
 
   end
 
