@@ -17,15 +17,26 @@ describe Lita::Handlers::Estimate, lita_handler: true do
       expect(subject.redis.hget('estimate:US123', 'Carl')).to eq("5")
     end
 
+    it "should confirm the estimate" do
+      carl = Lita::User.create(123, name: "Carl")
+      send_command('estimate US123 as 5', :as => carl)
+      expect(replies.last).to eq('Thanks!')
+    end
+
+    it "should reject the estimate if it is not a fibonacci number" do
+      carl = Lita::User.create(123, name: "Carl")
+      send_command('estimate US123 as 4', :as => carl)
+      expect(subject.redis.hget('estimate:US123', 'Carl')).to be_nil
+      expect(replies.last).to eq('Please use a Fibonacci number not larger than 13')
+    end
+
   end
 
   describe "show estimates" do
 
     before(:each) do
-      peter = Lita::User.create(123, name: "Peter")
-      paula = Lita::User.create(234, name: "Paula")
-      send_command('estimate US123 as 5', :as => peter)
-      send_command('estimate US123 as 3', :as => paula)
+      subject.redis.hset('estimate:US123', 'Peter', '5')
+      subject.redis.hset('estimate:US123', 'Paula', '3')
     end
 
     it "should list estimates" do

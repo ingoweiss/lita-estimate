@@ -13,13 +13,15 @@ Add lita-estimate to your Lita instance's Gemfile:
 gem "lita-estimate"
 ```
 
-## Configuration
-
-none
-
 ## Usage
 
 ```
-> @bot estimate US123 as 5
-> @bot estimates
+Peter> @bot estimate US123 as 5
+Bot> Thanks!
+Paula> @bot estimate US123 as 3
+Bot> Thanks!
+Carl> @bot estimates
+Bot> Peter: 5
+Bot> Paula: 3
+Bot> Average: 4
 ```

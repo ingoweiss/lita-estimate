@@ -7,7 +7,12 @@ module Lita
 
       def estimate(response)
         story, points = response.matches.first
-        redis.hset(key(story), response.user.name, points)
+        if ['1','2','3','5','8','13'].include?(points)
+          redis.hset(key(story), response.user.name, points)
+          response.reply('Thanks!')
+        else
+          response.reply('Please use a Fibonacci number not larger than 13')
+        end
       end
 
       def show_estimates(response)
