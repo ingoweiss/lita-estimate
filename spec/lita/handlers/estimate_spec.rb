@@ -14,7 +14,7 @@ describe Lita::Handlers::Estimate, lita_handler: true do
     it "should persist estimates" do
       carl = Lita::User.create(123, name: "Carl")
       send_command('estimate US123 as 5', :as => carl)
-      expect(subject.redis.get('US123:Carl')).to eq("5")
+      expect(subject.redis.hget('estimate:US123', 'Carl')).to eq("5")
     end
 
   end
@@ -30,7 +30,7 @@ describe Lita::Handlers::Estimate, lita_handler: true do
 
     it "should list estimates" do
       send_command('US123 estimates')
-      expect(replies).to eq([
+      expect(replies.to_set).to eq(Set[
         "Paula: 3",
         "Peter: 5",
         "Average: 4.0"

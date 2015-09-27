@@ -7,19 +7,22 @@ module Lita
 
       def estimate(response)
         story, points = response.matches.first
-        redis.set([story,response.user.name].join(':'), points)
+        redis.hset(key(story), response.user.name, points)
       end
 
       def show_estimates(response)
         story = response.matches.flatten.first
         estimates = []
-        redis.keys("#{story}:*").each do |key|
-          estimator = key.split(':').last
-          estimates << (estimate = redis.get(key).to_i)
+        redis.hgetall(key(story)).each do |estimator, estimate|
           response.reply("#{estimator}: #{estimate}")
+          estimates << estimate.to_i
         end
         average = estimates.inject{ |sum, e| sum + e }.to_f / estimates.size
         response.reply("Average: #{average}")
+      end
+
+      def key(story)
+        ['estimate', story].join(':')
       end
 
       Lita.register_handler(self)
