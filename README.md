@@ -16,7 +16,7 @@ gem "lita-estimate"
 ## Usage
 
 ```
-1) in private chats with the bot:
+1) In private chats with the bot:
 
 Peter> @bot estimate US123 as 5
 Bot> Thanks!
@@ -24,10 +24,14 @@ Bot> Thanks!
 Paula> @bot estimate US123 as 3
 Bot> Thanks!
 
-2) in team room:
+2) In team room:
 
 Carl> @bot US123 estimates
 Bot> Peter: 5
 Bot> Paula: 3
 Bot> Average: 4
+
+3) For more:
+
+Carl> @bot help
 ```
