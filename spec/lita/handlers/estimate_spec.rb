@@ -8,6 +8,7 @@ describe Lita::Handlers::Estimate, lita_handler: true do
       it { is_expected.to route_command("estimate #{story_format} as 1").to(:estimate) }
       it { is_expected.to route_command("#{story_format} estimates").to(:show_estimates) }
       it { is_expected.to route_command("#{story_format} estimators").to(:show_estimators) }
+      it { is_expected.to route_command("#{story_format} estimates reset").to(:reset_estimates) }
     end
 
   end
@@ -66,6 +67,26 @@ describe Lita::Handlers::Estimate, lita_handler: true do
         "Paula",
         "Peter"
       ])
+    end
+
+  end
+
+  describe "reset estimates" do
+
+    before(:each) do
+      subject.redis.hset('estimate:US123', 'Peter', '5')
+      subject.redis.hset('estimate:US123', 'Paula', '3')
+    end
+
+    it "should reset estimates" do
+      send_command('US123 estimates reset')
+      expect(subject.redis.hgetall('estimate:US123')).to eq({})
+    end
+
+    it "should confirm the reset" do
+      send_command('US123 estimates reset')
+      expect(replies.size).to eq(1)
+      expect(replies.last).to eq("Estimates reset for US123")
     end
 
   end
