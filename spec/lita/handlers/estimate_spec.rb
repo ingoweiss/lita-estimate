@@ -7,6 +7,7 @@ describe Lita::Handlers::Estimate, lita_handler: true do
     ['US123', 'us123', 'SEARCH-01', 'SEARCH_02', 'SEARCH.2.1'].each do |story_format|
       it { is_expected.to route_command("estimate #{story_format} as 1").to(:estimate) }
       it { is_expected.to route_command("#{story_format} estimates").to(:show_estimates) }
+      it { is_expected.to route_command("#{story_format} estimators").to(:show_estimators) }
     end
 
   end
@@ -47,6 +48,23 @@ describe Lita::Handlers::Estimate, lita_handler: true do
         "Paula: 3",
         "Peter: 5",
         "Average: 4.0"
+      ])
+    end
+
+  end
+
+  describe "show estimators" do
+
+    before(:each) do
+      subject.redis.hset('estimate:US123', 'Peter', '5')
+      subject.redis.hset('estimate:US123', 'Paula', '3')
+    end
+
+    it "should list estimates" do
+      send_command('US123 estimators')
+      expect(replies.to_set).to eq(Set[
+        "Paula",
+        "Peter"
       ])
     end
 
