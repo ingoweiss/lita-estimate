@@ -2,8 +2,8 @@ module Lita
   module Handlers
     class Estimate < Handler
 
-      route /estimate ([A-Za-z0-9_.-]+) as (\d+)/, :estimate,       command: true, help: {"estimate STORY_ID as FIBONACCI_NUMBER" => "Records your estimate for the story"}
-      route /([A-Za-z0-9_.-]+) estimates/,         :show_estimates, command: true, help: {"STORY_ID estimates" => "Lists all estimates for the story and their average"}
+      route /estimate ([A-Za-z0-9_.-]+) as (\d+)/, :estimate,        command: true, help: {"estimate STORY_ID as FIBONACCI_NUMBER" => "Records your estimate for the story"}
+      route /([A-Za-z0-9_.-]+) estimates/,         :show_estimates,  command: true, help: {"STORY_ID estimates" => "Lists all estimates for the story and their average"}
       route /([A-Za-z0-9_.-]+) estimators/,        :show_estimators, command: true, help: {"STORY_ID estimators" => "Lists all estimators for the story"}
 
       def estimate(response)
