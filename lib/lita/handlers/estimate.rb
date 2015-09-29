@@ -19,19 +19,27 @@ module Lita
 
       def show_estimates(response)
         story = response.matches.flatten.first
-        estimates = []
-        redis.hgetall(key(story)).each do |estimator, estimate|
-          response.reply("#{estimator}: #{estimate}")
-          estimates << estimate.to_i
+        estimates = redis.hgetall(key(story))
+        if estimates.empty?
+          response.reply("No estimates yet for #{story}")
+        else
+          estimates.each do |estimator, estimate|
+            response.reply("#{estimator}: #{estimate}")
+          end
+          average = estimates.values.inject(0){ |sum, e| sum + e.to_i }.to_f / estimates.size
+          response.reply("Average: #{average}")
         end
-        average = estimates.inject{ |sum, e| sum + e }.to_f / estimates.size
-        response.reply("Average: #{average}")
       end
 
       def show_estimators(response)
         story = response.matches.flatten.first
-        redis.hgetall(key(story)).each do |estimator, estimate|
-          response.reply(estimator)
+        estimates = redis.hgetall(key(story))
+        if estimates.empty?
+          response.reply("No estimators yet for #{story}")
+        else
+          estimates.keys.each do |estimator|
+            response.reply(estimator)
+          end
         end
       end
 

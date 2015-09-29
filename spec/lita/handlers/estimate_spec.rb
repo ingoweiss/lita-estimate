@@ -38,12 +38,9 @@ describe Lita::Handlers::Estimate, lita_handler: true do
 
   describe "show estimates" do
 
-    before(:each) do
+    it "should list estimates" do
       subject.redis.hset('estimate:US123', 'Peter', '5')
       subject.redis.hset('estimate:US123', 'Paula', '3')
-    end
-
-    it "should list estimates" do
       send_command('US123 estimates')
       expect(replies.to_set).to eq(Set[
         "Paula: 3",
@@ -52,16 +49,18 @@ describe Lita::Handlers::Estimate, lita_handler: true do
       ])
     end
 
+    it "should show a message if no estimates are found" do
+      send_command('US456 estimates')
+      expect(replies.last).to eq('No estimates yet for US456')
+    end
+
   end
 
   describe "show estimators" do
 
-    before(:each) do
+    it "should list estimates" do
       subject.redis.hset('estimate:US123', 'Peter', '5')
       subject.redis.hset('estimate:US123', 'Paula', '3')
-    end
-
-    it "should list estimates" do
       send_command('US123 estimators')
       expect(replies.to_set).to eq(Set[
         "Paula",
@@ -69,16 +68,18 @@ describe Lita::Handlers::Estimate, lita_handler: true do
       ])
     end
 
+    it "should show a message if no estimates are found" do
+      send_command('US456 estimators')
+      expect(replies.last).to eq('No estimators yet for US456')
+    end
+
   end
 
   describe "reset estimates" do
 
-    before(:each) do
+    it "should reset estimates" do
       subject.redis.hset('estimate:US123', 'Peter', '5')
       subject.redis.hset('estimate:US123', 'Paula', '3')
-    end
-
-    it "should reset estimates" do
       send_command('US123 estimates reset')
       expect(subject.redis.hgetall('estimate:US123')).to eq({})
     end
