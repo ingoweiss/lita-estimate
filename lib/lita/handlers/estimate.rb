@@ -23,11 +23,13 @@ module Lita
         if estimates.empty?
           response.reply("No estimates yet for #{story}")
         else
-          estimates.each do |estimator, estimate|
-            response.reply("#{estimator}: #{estimate}")
+          lines = []
+          estimates.keys.sort.each do |estimator|
+            lines << "#{estimator}: #{estimates[estimator]}"
           end
           average = estimates.values.inject(0){ |sum, e| sum + e.to_i }.to_f / estimates.size
-          response.reply("Average: #{average}")
+          lines << "Average: #{average}"
+          response.reply(lines.join("\n"))
         end
       end
 
@@ -37,9 +39,7 @@ module Lita
         if estimates.empty?
           response.reply("No estimators yet for #{story}")
         else
-          estimates.keys.each do |estimator|
-            response.reply(estimator)
-          end
+          response.reply(estimates.keys.sort.join("\n"))
         end
       end
 
