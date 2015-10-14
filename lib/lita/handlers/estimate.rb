@@ -25,10 +25,10 @@ module Lita
         else
           lines = []
           estimates.keys.sort.each do |estimator|
-            lines << "#{estimator}: #{estimates[estimator]}"
+            lines << "#{estimates[estimator]} (#{estimator})"
           end
           average = estimates.values.inject(0){ |sum, e| sum + e.to_i }.to_f / estimates.size
-          lines << "Average: #{average}"
+          lines << "#{average} (Average)"
           response.reply(lines.join("\n"))
         end
       end

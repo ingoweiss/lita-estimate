@@ -43,9 +43,9 @@ describe Lita::Handlers::Estimate, lita_handler: true do
       subject.redis.hset('estimate:US123', 'Paula', '3')
       send_command('US123 estimates')
       expect(lines(replies.last)).to eq([
-        "Paula: 3",
-        "Peter: 5",
-        "Average: 4.0"
+        "3 (Paula)",
+        "5 (Peter)",
+        "4.0 (Average)"
       ])
     end
 
