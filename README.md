@@ -1,5 +1,6 @@
 # lita-estimate
 
+[![Gem Version](https://badge.fury.io/rb/lita-estimate.svg)](https://badge.fury.io/rb/lita-estimate)
 [![Build Status](https://travis-ci.org/ingoweiss/lita-estimate.png?branch=master)](https://travis-ci.org/ingoweiss/lita-estimate)
 [![Coverage Status](https://coveralls.io/repos/ingoweiss/lita-estimate/badge.png)](https://coveralls.io/r/ingoweiss/lita-estimate)
 
