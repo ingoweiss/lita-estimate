@@ -29,9 +29,9 @@ Bot> Thanks!
 2) In team room:
 
 Carl> @bot US123 estimates
-Bot> Peter: 5
-Bot> Paula: 3
-Bot> Average: 4
+Bot> 5 (Peter)
+Bot> 3 (Paula)
+Bot> 4.0 (Average)
 
 3) For more:
 
