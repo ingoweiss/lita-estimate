@@ -27,8 +27,7 @@ module Lita
           estimates.keys.sort.each do |estimator|
             lines << "#{estimates[estimator]} (#{estimator})"
           end
-          average = estimates.values.inject(0){ |sum, e| sum + e.to_i }.to_f / estimates.size
-          lines << "#{average} (Average)"
+          lines << "#{average(estimates.values)} (Average)"
           response.reply(lines.join("\n"))
         end
       end
@@ -51,6 +50,10 @@ module Lita
 
       def key(story)
         ['estimate', story].join(':')
+      end
+
+      def average(estimates)
+        estimates.map(&:to_i).inject(:+).to_f / estimates.size
       end
 
       Lita.register_handler(self)
