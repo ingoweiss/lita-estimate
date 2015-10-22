@@ -45,7 +45,7 @@ describe Lita::Handlers::Estimate, lita_handler: true do
       expect(lines(replies.last)).to eq([
         "3 (Paula)",
         "5 (Peter)",
-        "4.0 (Average)"
+        "4.0 Average"
       ])
     end
 
