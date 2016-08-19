@@ -27,7 +27,7 @@ module Lita
           estimates.map{|dev, est| [est.to_i, dev]}.sort.each do |estimate, estimator|
             lines << "#{estimate} (#{estimator})"
           end
-          lines << "#{average(estimates.values)} Average"
+          lines << "#{sprintf('%.1f', average(estimates.values))} Average"
           response.reply(lines.join("\n"))
         end
       end
