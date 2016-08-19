@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name          = "lita-estimate"
-  spec.version       = "0.1.6"
+  spec.version       = "0.1.7"
   spec.authors       = ["Ingo Weiss"]
   spec.email         = ["ingo@ingoweiss.com"]
   spec.description   = "Just a silly little Lita plugin for estimation"
